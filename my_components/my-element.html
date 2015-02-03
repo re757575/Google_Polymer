@@ -27,16 +27,28 @@
     <polymer-element name="my-element2">
         <template>
             <span>Hello from <b>my-element2</b>. This is my Shadow DOM.</span>
+            <br>
+            <span id="name">Hi {{name}}</span>
+            <br>
+            <input id="nameInput" value="{{name}}" placeholder="Enter name...">
         </template>
         <script>
-            Polymer({
+            Polymer('my-element2', {
+                name: "Alex",
                 ready: function() {
                     console.log('my-element2 ready');
+                    $('#name').html(this.name);
                     $(this).click(function(event) {
                         /* Act on the event */
-                        console.log(event);
+                        console.log('my-element2 clicked');
                     });
-              }
+                },
+                created: function() {
+                    console.log('my-element2 created');
+                },
+                nameChanged: function (e) {
+                    console.log('nameChanged: '+ this.name);
+                }
             });
         </script>
     </polymer-element>
