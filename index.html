@@ -9,28 +9,34 @@
 <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
-
+<!--
 <script src="pub/js/jquery/jquery-1.10.2.min.js"></script>
-
+<script src="pub/js/bootstrap/bootstrap-3.3.2.min.js"></script>
+-->
 <!-- 1. Load webcomponents support before any code that touches the DOM. -->
 <script src="bower_components/webcomponentsjs/webcomponents.min.js"></script>
 
 <!-- 2. Load the component using an HTML Import -->
-<link rel="import" href="my_components/my-element.html">
+<link rel="import" href="my_components/my-navbar/my-navbar.html" >
 
 <style>
-  html,body {
-    height: 100%;
-    margin: 0;
-    background-color: #E5E5E5;
-    font-family: 'RobotoDraft', sans-serif;
-  }
+    body {
+        background-color:#eee;
+        padding-top: 70px;
+    }
+    html,body {
+        height: 100%;
+        margin: 0;
+        background-color: #E5E5E5;
+        font-family: 'RobotoDraft', sans-serif;
+    }
 </style>
 </head>
 <body unresolved touch-action="auto">
     <!-- 3. Declare the element by its tag. -->
-    <my-element></my-element>
-    <br><br>
-    <my-element2></my-element2>
+    <my-navbar></my-navbar>
+
+<script src="pub/js/jquery/jquery-1.10.2.min.js"></script>
+<script src="pub/js/bootstrap/bootstrap-3.3.2.min.js"></script>
 </body>
 </html>
