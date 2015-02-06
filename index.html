@@ -10,13 +10,16 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 
-<script src="pub/js/jquery/jquery-1.10.2.min.js"></script>
+<link href="pub/css/bootstrap/bootstrap-3.3.2.min.css" rel="stylesheet">
+<!-- Material Design for Bootstrap -->
+<link href="pub/css/bootstrap-material-design/0.2.2/material-wfont.min.css" rel="stylesheet">
 
 <!-- 1. Load webcomponents support before any code that touches the DOM. -->
 <script src="bower_components/webcomponentsjs/webcomponents.min.js"></script>
 
 <!-- 2. Load the component using an HTML Import -->
 <link rel="import" href="my_components/my-element.html">
+<link rel="import" href="my_components/my-modal/index.html" >
 
 <style>
   html,body {
@@ -32,5 +35,10 @@
     <my-element></my-element>
     <br><br>
     <my-element2></my-element2>
+    <br><br>
+    <my-modal btnName="請點我" modalTitle="我是modalTitle" modalbody="<h1>Polymer</h1>"></my-modal>
+
+    <script src="pub/js/jquery/jquery-1.10.2.min.js"></script>
+    <script src="pub/js/bootstrap/bootstrap-3.3.2.min.js"></script>
 </body>
 </html>
