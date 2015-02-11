@@ -1,18 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>my-modal</title>
-
-<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-<!--[if lt IE 9]>
-  <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-  <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
-<![endif]-->
 <link rel="import" href="../../bower_components/polymer/polymer.html">
-
 <!--
 <link href="pub/css/bootstrap/bootstrap-3.3.2.min.css" rel="stylesheet">
 <link href="pub/css/bootstrap-material-design/0.2.2/material-wfont.min.css" rel="stylesheet">
@@ -20,87 +6,80 @@
 <script src="pub/js/bootstrap/bootstrap-3.3.2.min.js"></script>
 -->
 
-</head>
-<body>
-    <!-- 自製Modal樣板
-         注意:想要在標籤設定屬性而改變樣板內的內容值,必須要在<polymer-element>加入 attributes 並設定所要開放的屬性變數.
-    -->
-    <polymer-element name="my-modal" attributes="btnName modalTitle modalbody">
-        <template>
-            <style>
-                @import 'pub/css/bootstrap/bootstrap-3.3.2.min.css';
-                @import 'pub/css/bootstrap-material-design/0.2.2/material-wfont.min.css';
-            </style>
+<!-- 自製Modal樣板
+     注意:想要在標籤設定屬性而改變樣板內的內容值,必須要在<polymer-element>加入 attributes 並設定所要開放的屬性變數.
+-->
+<polymer-element name="my-modal" attributes="btnName modalTitle modalbody">
+    <template>
+        <style>
+            @import 'pub/css/bootstrap/bootstrap-3.3.2.min.css';
+            @import 'pub/css/bootstrap-material-design/0.2.2/material-wfont.min.css';
+        </style>
 
-            <button id="goModal" on-click="{{sayHi}}" class="btn btn-info">{{btnName}}</button>
-            <div id="myModal" class="modal fade" tabindex="-1">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                            <h4 class="modal-title">{{modalTitle}}</h4>
-                        </div>
-                        <div class="modal-body">
-                            <pre>{{modalbody}}</pre>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">{{modal_N_Btn_Title}}</button>
-                            <button type="button" id="yesBtn" class="btn btn-primary">{{modal_Y_Btn_Title}}</button>
-                        </div>
+        <button id="goModal" on-click="{{sayHi}}" class="btn btn-info">{{btnName}}</button>
+        <div id="myModal" class="modal fade" tabindex="-1">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title">{{modalTitle}}</h4>
+                    </div>
+                    <div class="modal-body">
+                        <pre>{{modalbody}}</pre>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">{{modal_N_Btn_Title}}</button>
+                        <button type="button" id="yesBtn" class="btn btn-primary">{{modal_Y_Btn_Title}}</button>
                     </div>
                 </div>
             </div>
-        </template>
-        <script>
-            Polymer({
-                // 這裡的預設值將被使用者設定的標籤屬性所覆蓋
-                btnName: 'click me',
-                modalTitle: 'Modal title',
-                modalbody: 'Test Test Test',
-                modal_Y_Btn_Title: 'Save changes',
-                modal_N_Btn_Title: 'Close',
-                ready: function() {
+        </div>
+    </template>
+    <script>
+        Polymer({
+            // 這裡的預設值將被使用者設定的標籤屬性所覆蓋
+            btnName: 'click me',
+            modalTitle: 'Modal title',
+            modalbody: 'Test Test Test',
+            modal_Y_Btn_Title: 'Save changes',
+            modal_N_Btn_Title: 'Close',
+            ready: function() {
 
-                    var that = this;
-                    var goModalBtn = this.$.goModal;
-                    var myModal = that.$.myModal;
-                    // some_element.shadowRoot.firstElementChild
-                    var yesBtn = $('my-modal::shadow #yesBtn');
-                    // $('my-modal::shadow .btn') 結果:只取離 shadowRoot 最近得一個
+                var that = this;
+                var goModalBtn = this.$.goModal;
+                var myModal = that.$.myModal;
+                // some_element.shadowRoot.firstElementChild
+                var yesBtn = $('my-modal::shadow #yesBtn');
+                // $('my-modal::shadow .btn') 結果:只取離 shadowRoot 最近得一個
 
-                    $(goModalBtn).click(function(event) {
-                        that.btnName = 'clicked';
-                        //that.modalTitle = 'Polymer';
-                        //that.modalbody = '哈囉 Polymer!';
-                        that.modal_Y_Btn_Title = '確定';
-                        that.modal_N_Btn_Title = '取消';
-                        $(myModal).modal();
-                    });
+                $(goModalBtn).click(function(event) {
+                    that.btnName = 'clicked';
+                    //that.modalTitle = 'Polymer';
+                    //that.modalbody = '哈囉 Polymer!';
+                    that.modal_Y_Btn_Title = '確定';
+                    that.modal_N_Btn_Title = '取消';
+                    $(myModal).modal();
+                });
 
-                    $(myModal).on('hidden.bs.modal', function () {
-                        yesBtn.attr("disabled", false);
-                        alert('closed, yesBtn disabled:false');
-                    });
+                $(myModal).on('hidden.bs.modal', function () {
+                    yesBtn.attr("disabled", false);
+                    alert('closed, yesBtn disabled:false');
+                });
 
-                    yesBtn.click(function(event) {
-                        $(this).attr("disabled", true);
-                        alert('clicked, yesBtn disabled:true');
-                        $(myModal).modal('hide');
-                    });
+                yesBtn.click(function(event) {
+                    $(this).attr("disabled", true);
+                    alert('clicked, yesBtn disabled:true');
+                    $(myModal).modal('hide');
+                });
 
-                    console.log('my-modal ready');
-                },
-                created: function() {
-                    console.log('my-modal created');
-                },
-                sayHi: function() {
-                    alert('Hi');
-                }
-            });
-        </script>
-    </polymer>
-    <!--
-    <my-modal></my-modal>
-    -->
-</body>
-</html>
+                console.log('my-modal ready');
+            },
+            created: function() {
+                console.log('my-modal created');
+            },
+            sayHi: function() {
+                alert('Hi');
+            }
+        });
+    </script>
+</polymer-element>
