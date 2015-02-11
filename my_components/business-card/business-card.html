@@ -1,0 +1,62 @@
+
+<!-- 自製名片樣板 -->
+<polymer-element name="business-card" attributes="name mobile tel fax email
+                                                  address companyName_zh companyName_en">
+    <template>
+        <style>
+            @import 'pub/css/bootstrap/bootstrap-3.3.2.min.css';
+            @import 'pub/css/bootstrap-material-design/0.2.2/material-wfont.min.css';
+            @import 'pub/css/bootstrap-material-design/0.2.2/ripples.min.css';
+            .panel-body:hover {
+                background-color: #E1F5FE;
+            }
+        </style>
+        <div class="col-lg-4">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <p style="font-family:微軟正黑體;color:rgb(51,51,51)">
+                        <span id ="name">{{name}}</span> / <span id="mobile">{{mobile}}</span>
+                        <br>Tel : <span id="tel">{{tel}}</span>
+                        <br>Fax : <span id="fax">{{fax}}</span>
+                        <br>e-mail :<span>&nbsp;<a id="email" href="{{email}}" target="_blank">{{email}}</a></span>
+                        <br>Add : <span id="address">{{address}}</span>
+                    </p>
+                    <p style="font-family:微軟正黑體;color:rgb(51,51,51)">
+                        <strong style="color:rgb(0,0,0);font-size:15px">
+                            <span id="companyName_zh">{{companyName_zh}}</span><br>
+                            <span id="companyName_en">{{companyName_en}}</span>
+                        </strong>
+                        <br style="color:rgb(0,0,0)">
+                        <font color="#f29700">■</font><span style="color:rgb(0,0,0)">&nbsp;系統整合&nbsp;</span>
+                        <font color="#0075c2">■</font><span style="color:rgb(0,0,0)">&nbsp;電子商務&nbsp;</span>
+                        <font color="#67af29">■</font><span style="color:rgb(0,0,0)">&nbsp;網站營運&nbsp;</span>
+                        <font color="#e70012">■</font><span style="color:rgb(0,0,0)">&nbsp;客製化服務</span>
+                        <br>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </template>
+    <script>
+    (function(){
+
+        Polymer({
+            name: '電競柯聞折',
+            mobile: '0900-XXXXXX',
+            tel: '02-0000XXXX',
+            fax: '02-0000XXXX',
+            email: 'pp@pp.com',
+            address: '台北XXX區00路100樓之9',
+            companyName_zh: 'aaaaaaaaa',
+            companyName_en: 'bbbbbbbbb',
+            created: function() {
+                console.log('business-card created');
+            },
+            ready: function() {
+                console.log('business-card ready');
+            }
+        });
+
+    })();
+    </script>
+</polymer-element>
