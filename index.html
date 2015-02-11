@@ -6,7 +6,7 @@
 
 <title>Google Polymer Examples</title>
 
-<meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
+<meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=no">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 
@@ -18,13 +18,12 @@
 <script src="bower_components/webcomponentsjs/webcomponents.min.js"></script>
 -->
 
-<!-- 2. Load the component using an HTML Import -->
-
+<!-- 2. Load the component using an HTML Import
 <link rel="import" href="my_components/my-element.html">
 <link rel="import" href="my_components/my-modal/my-modal.html" >
 <link rel="import" href="my_components/my-navbar/my-navbar.html" >
 <link rel="import" href="my_components/business-card/business-card.html" >
-
+ -->
 <style>
     body {
         background-color:#eee;
@@ -58,6 +57,29 @@
 
     <script>
     (function () {
+
+        var init = {
+            components: ['my_components/my-element.html',
+                         'my_components/my-modal/my-modal.html',
+                         'my_components/my-navbar/my-navbar.html',
+                         'my_components/business-card/business-card.html',
+                         ],
+            goImport: function(callback) {
+                var count = 0;
+                for (var i  in this.components) {
+                    var link = document.createElement('link');
+                        link.setAttribute("rel", "import");
+                        link.setAttribute("href", this.components[i]);
+                        // 動態產生
+                        if (count === this.components.length-1) {
+                            link.onload = createTag(this);
+                        }
+                    document.body.appendChild(link);
+                    count++;
+                }
+            },
+        };
+
         function supportsTemplate() {
             var result = 'content' in document.createElement('template');
                 console.log(result === true ? '支持 Template' : '不支持 Template');
@@ -97,31 +119,33 @@
             script.setAttribute("src", 'bower_components/webcomponentsjs/webcomponents.min.js');
             script.onload = function() {
                 console.log('webcomponents.js 載入完畢');
-                createTag();
+                init.goImport();
             };
             document.body.appendChild(script);
         }
 
         function createTag() {
-            var br ='<br><br>';
-            var myNnavbar = '<my-navbar></my-navbar>';
+            return function () {
+                var br ='<br><br>';
+                var myNnavbar = '<my-navbar></my-navbar>';
 
-            var myElement = '<my-element></my-element>';
+                var myElement = '<my-element></my-element>';
 
-            var myElement2 = '<my-element2></my-element2>';
+                var myElement2 = '<my-element2></my-element2>';
 
-            var myModal = '<my-modal btnName="請點我" modalTitle="我是modalTitle" modalbody="<h1>Polymer</h1>"></my-modal>';
+                var myModal = '<my-modal btnName="請點我" modalTitle="我是modalTitle" modalbody="<h1>Polymer</h1>"></my-modal>';
 
-            var businessCcard = '<business-card companyName_zh="台北電競有限公司"></business-card>';
+                var businessCcard = '<business-card companyName_zh="台北電競有限公司"></business-card>';
 
-            var tmpl = '<template id="tmpl" repeat="{{businessCcard}}"><business-card name="{{name}}"></business-card></template>';
+                var tmpl = '<template id="tmpl" repeat="{{businessCcard}}"><business-card name="{{name}}"></business-card></template>';
 
-            var html = myNnavbar + myElement + br + myElement2 +
-                       br + myModal + br + businessCcard + tmpl;
+                var html = myNnavbar + myElement + br + myElement2 +
+                           br + myModal + br + businessCcard + tmpl;
 
-            $('.container').append(html);
-            repeatBusinessCcard();
-            console.log('自製標籤寫入HTML完成');
+                $('.container').append(html);
+                repeatBusinessCcard();
+                console.log('自製標籤寫入HTML完成');
+            };
         }
 
         (function checkSupportsComponents() {
