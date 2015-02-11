@@ -1,56 +1,47 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8">
-<title>my-element</title>
 <link rel="import" href="../bower_components/polymer/polymer.html">
-</head>
-<body>
-    <!-- 簡單元件使用 noscript 屬性 , polymer element 將自動註冊,但不能使用任何 script -->
-    <polymer-element name="my-element" noscript>
-        <template>
-            <span>Hello from <b>my-element</b>. This is my Shadow DOM.</span>
-        </template>
-        <script>
-            /*
-                無效 script
-                會收到錯誤: Uncaught Already registered (Polymer) prototype for element my-element
-             */
-            Polymer({
-                ready: function() {
-                    console.log('my-element ready');
-                }
-            });
-        </script>
-    </polymer-element>
+<!-- 簡單元件使用 noscript 屬性 , polymer element 將自動註冊,但不能使用任何 script -->
+<polymer-element name="my-element" noscript>
+    <template>
+        <span>Hello from <b>my-element</b>. This is my Shadow DOM.</span>
+    </template>
+    <script>
+        /*
+            無效 script
+            會收到錯誤: Uncaught Already registered (Polymer) prototype for element my-element
+         */
+        Polymer({
+            ready: function() {
+                console.log('my-element ready');
+            }
+        });
+    </script>
+</polymer-element>
 
-    <polymer-element name="my-element2">
-        <template>
-            <span>Hello from <b>my-element2</b>. This is my Shadow DOM.</span>
-            <br>
-            <span id="name">Hi {{name}}</span>
-            <br>
-            <input id="nameInput" value="{{name}}" placeholder="Enter name...">
-        </template>
-        <script>
-            Polymer('my-element2', {
-                name: "Alex",
-                ready: function() {
-                    console.log('my-element2 ready');
-                    $('#name').html(this.name);
-                    $(this).click(function(event) {
-                        /* Act on the event */
-                        console.log('my-element2 clicked');
-                    });
-                },
-                created: function() {
-                    console.log('my-element2 created');
-                },
-                nameChanged: function (e) {
-                    console.log('nameChanged: '+ this.name);
-                }
-            });
-        </script>
-    </polymer-element>
-</body>
-</html>
+<polymer-element name="my-element2">
+    <template>
+        <span>Hello from <b>my-element2</b>. This is my Shadow DOM.</span>
+        <br>
+        <span id="name">Hi {{name}}</span>
+        <br>
+        <input id="nameInput" value="{{name}}" placeholder="Enter name...">
+    </template>
+    <script>
+        Polymer('my-element2', {
+            name: "Alex",
+            ready: function() {
+                console.log('my-element2 ready');
+                $('#name').html(this.name);
+                $(this).click(function(event) {
+                    /* Act on the event */
+                    console.log('my-element2 clicked');
+                });
+            },
+            created: function() {
+                console.log('my-element2 created');
+            },
+            nameChanged: function (e) {
+                console.log('nameChanged: '+ this.name);
+            }
+        });
+    </script>
+</polymer-element>
