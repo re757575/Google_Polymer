@@ -14,8 +14,9 @@
 <!-- Material Design for Bootstrap -->
 <link href="pub/css/bootstrap-material-design/0.2.2/material-wfont.min.css" rel="stylesheet">
 
-<!-- 1. Load webcomponents support before any code that touches the DOM. -->
+<!-- 1. Load webcomponents support before any code that touches the DOM.
 <script src="bower_components/webcomponentsjs/webcomponents.min.js"></script>
+-->
 
 <!-- 2. Load the component using an HTML Import -->
 
@@ -79,36 +80,54 @@
             document.addEventListener('polymer-ready',function(){
                 document.querySelector('#tmpl').model = {
                     businessCcard: [
-                        {'name':'apple',},
-                        {'name':'bnana'},
-                        {'name':'orange'}
+                        {'name':'Apple',},
+                        {'name':'Bnana'},
+                        {'name':'Orange'},
+                        {'name':'Strawberry'},
+                        {'name':'Cherry'},
                     ]
                 };
+                console.log('polymer-ready');
             });
+            console.log('repeatBusinessCcard');
+        }
+
+        function loadScript() {
+            var script = document.createElement('script');
+            script.setAttribute("src", 'bower_components/webcomponentsjs/webcomponents.min.js');
+            script.onload = function() {
+                console.log('webcomponents.js 載入完畢');
+                createTag();
+            };
+            document.body.appendChild(script);
+        }
+
+        function createTag() {
+            var br ='<br><br>';
+            var myNnavbar = '<my-navbar></my-navbar>';
+
+            var myElement = '<my-element></my-element>';
+
+            var myElement2 = '<my-element2></my-element2>';
+
+            var myModal = '<my-modal btnName="請點我" modalTitle="我是modalTitle" modalbody="<h1>Polymer</h1>"></my-modal>';
+
+            var businessCcard = '<business-card companyName_zh="台北電競有限公司"></business-card>';
+
+            var tmpl = '<template id="tmpl" repeat="{{businessCcard}}"><business-card name="{{name}}"></business-card></template>';
+
+            var html = myNnavbar + myElement + br + myElement2 +
+                       br + myModal + br + businessCcard + tmpl;
+
+            $('.container').append(html);
+            repeatBusinessCcard();
+            console.log('自製標籤寫入HTML完成');
         }
 
         (function checkSupportsComponents() {
             if (supportsTemplate() && supportsImports() && supportsCustomElements()) {
-                var br ='<br><br>';
-                var myNnavbar = '<my-navbar></my-navbar>';
-
-                var myElement = '<my-element></my-element>';
-
-                var myElement2 = '<my-element2></my-element2>';
-
-                var myModal = '<my-modal btnName="請點我" modalTitle="我是modalTitle" modalbody="<h1>Polymer</h1>"></my-modal>';
-
-                var businessCcard = '<business-card companyName_zh="台北電競有限公司"></business-card>';
-
-                var tmpl = '<template id="tmpl" repeat="{{businessCcard}}"><business-card name="{{name}}"></business-card></template>';
-
-                var html = myNnavbar + myElement + br + myElement2 +
-                           br + myModal + br + businessCcard + tmpl;
-
-                $('.container').append(html);
-
-                repeatBusinessCcard();
-
+                console.log('支持 Web Components');
+                loadScript();
             } else {
                 alert('抱歉，您的瀏覽器沒有完全支援 Web Components');
             }
