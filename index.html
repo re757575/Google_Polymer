@@ -14,16 +14,16 @@
 <!-- Material Design for Bootstrap -->
 <link href="pub/css/bootstrap-material-design/0.2.2/material-wfont.min.css" rel="stylesheet">
 
-<!-- 1. Load webcomponents support before any code that touches the DOM.-->
+<!-- 1. Load webcomponents support before any code that touches the DOM.
 <script src="bower_components/webcomponentsjs/webcomponents.min.js"></script>
-
+-->
 
 <!-- 2. Load the component using an HTML Import
 <link rel="import" href="my_components/my-element.html">
 <link rel="import" href="my_components/my-modal/my-modal.html" >
 <link rel="import" href="my_components/my-navbar/my-navbar.html" >
 <link rel="import" href="my_components/business-card/business-card.html" >
- -->
+-->
 <style>
     body {
         background-color:#eee;
@@ -151,8 +151,7 @@
         (function checkSupportsComponents() {
             if (supportsTemplate() && supportsImports() && supportsCustomElements()) {
                 console.log('支持 Web Components');
-                //loadScript();
-                createTag();
+                loadScript();
             } else {
                 alert('抱歉，您的瀏覽器沒有完全支援 Web Components');
             }
